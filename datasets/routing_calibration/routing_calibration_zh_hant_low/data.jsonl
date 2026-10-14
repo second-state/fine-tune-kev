@@ -1,0 +1,16 @@
+{"id":"rc_zh_hant_low_001","prompt":"27 加 15 等於多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"42","pair_id":"low_001","difficulty":"low"}}
+{"id":"rc_zh_hant_low_002","prompt":"84 減 37 等於多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"47","pair_id":"low_002","difficulty":"low"}}
+{"id":"rc_zh_hant_low_003","prompt":"8 乘以 7 等於多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"56","pair_id":"low_003","difficulty":"low"}}
+{"id":"rc_zh_hant_low_004","prompt":"96 的一半是多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"48","pair_id":"low_004","difficulty":"low"}}
+{"id":"rc_zh_hant_low_005","prompt":"80 的 25% 是多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"20","pair_id":"low_005","difficulty":"low"}}
+{"id":"rc_zh_hant_low_006","prompt":"美玲原本有 12 顆蘋果，又買了 5 顆，接著送給朋友 4 顆。她現在有幾顆蘋果？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"13","pair_id":"low_006","difficulty":"low"}}
+{"id":"rc_zh_hant_low_007","prompt":"一場會議在 14:15 開始，持續 45 分鐘。會議結束時的 24 小時制小時數（0 至 23）是多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"15","pair_id":"low_007","difficulty":"low"}}
+{"id":"rc_zh_hant_low_008","prompt":"先找出 0.8、0.08、0.18、0.81 中最小的數，再將它乘以 100。結果是多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"8","pair_id":"low_008","difficulty":"low"}}
+{"id":"rc_zh_hant_low_009","prompt":"數列 3、6、9、12、…… 的下一個數是多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"15","pair_id":"low_009","difficulty":"low"}}
+{"id":"rc_zh_hant_low_010","prompt":"每一株鬱金香都是花。這株植物是鬱金香。這株植物必然是花嗎？若答案為「是」請輸出 1，否則輸出 0。\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"1","pair_id":"low_010","difficulty":"low"}}
+{"id":"rc_zh_hant_low_011","prompt":"大寫英文單字 BALLOON 中有幾個母音字母？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"3","pair_id":"low_011","difficulty":"low"}}
+{"id":"rc_zh_hant_low_012","prompt":"3 公尺 40 公分等於多少公分？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"340","pair_id":"low_012","difficulty":"low"}}
+{"id":"rc_zh_hant_low_013","prompt":"6、8、10 的算術平均數是多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"8","pair_id":"low_013","difficulty":"low"}}
+{"id":"rc_zh_hant_low_014","prompt":"一個長方形的長為 9、寬為 4。它的周長是多少？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"26","pair_id":"low_014","difficulty":"low"}}
+{"id":"rc_zh_hant_low_015","prompt":"一件商品售價 18 元，你付了 20 元。應找回多少元？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"2","pair_id":"low_015","difficulty":"low"}}
+{"id":"rc_zh_hant_low_016","prompt":"下列數字中有幾個偶數：27、35、42、51？\n\n請解出問題，並在回覆最後一行只寫數字答案。","payload":{"answer":"1","pair_id":"low_016","difficulty":"low"}}

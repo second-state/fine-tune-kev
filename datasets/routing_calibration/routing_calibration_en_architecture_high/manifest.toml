@@ -1,0 +1,9 @@
+name = "routing_calibration_en_architecture_high"
+category = "coding"
+lang = "en"
+scorer = "exact_match"
+extract = "last_number"
+source = "smart-route-bench synthetic matched-pair routing calibration"
+license = "CC0-1.0"
+version = "1.1"
+sample_size = 8

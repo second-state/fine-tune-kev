@@ -1,0 +1,225 @@
+{
+  "status": "passed",
+  "verified_at_utc": "2026-10-13T09:13:20.396093+00:00",
+  "scope": "End-to-end reproduction of the README on the same fixed split, not a new holdout experiment.",
+  "work_directory": "runs/reproduction",
+  "readme_original_sha256": "894c8d46c1e0dcc95bcdaae69cfb86a56533eefc3dbabd0ac9471837baa01ce3",
+  "readme_verified_sha256": "7728c59bf002f46d0e8234949d64db23a6a0beff42145da67c5659aec95458cd",
+  "original_workflow_commands_unchanged": true,
+  "source_commit": "0fe8fc97c2bcc247fa3efb6e5c32af4e99770e91",
+  "source_worktree_clean": true,
+  "runtime": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.13.5",
+    "packages": {
+      "torch": "2.8.0",
+      "transformers": "5.17.0",
+      "peft": "0.21.0",
+      "mlx": "0.32.2",
+      "mlx-lm": "0.31.3",
+      "huggingface-hub": "1.32.0",
+      "datasets": "5.0.1",
+      "accelerate": "1.15.0"
+    },
+    "mps_built": true,
+    "mps_available_in_sandbox": false,
+    "chip": "Apple M2 Max",
+    "memory_bytes": 68719476736,
+    "uv": "0.9.27",
+    "mps_training_verified": true
+  },
+  "offline_checks": {
+    "unit_test_command": "python3 -B -m unittest discover -s tools/kev -p 'test_*.py'",
+    "unit_tests_passed": 18,
+    "unit_test_returncode": 0,
+    "unit_test_python": "3.14.7",
+    "rebuilt_split_and_manifest_byte_identical": true,
+    "unchanged_original_files": 76,
+    "local_readme_links_valid": 16
+  },
+  "download": {
+    "bytes": 9502510659,
+    "wall_seconds": 211.61515837500338,
+    "models": {
+      "base": {
+        "repo": "Qwen/Qwen3.5-4B-Base",
+        "revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+        "files": 10
+      },
+      "parent": {
+        "repo": "jaredpalmer/kev-4b",
+        "revision": "139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+        "files": 13
+      }
+    },
+    "manifest_sha256": "52f3920905c179133eef5b6f56c1bf1f12ba5e87a60dc914d30deeaa61e1818e"
+  },
+  "workflow": {
+    "training_started_at_utc": "2026-10-13T08:33:03Z",
+    "test_inference_started_at_utc": "2026-10-13T09:10:56Z",
+    "finished_at_utc": "2026-10-13T09:11:54Z",
+    "wall_seconds_excluding_setup_and_download": 2331,
+    "returncode": 0,
+    "train_and_dev_inference_started_at_utc": "2026-10-13T09:07:51Z"
+  },
+  "training": {
+    "preflight": {
+      "returncode": 0,
+      "process_wall_seconds": 85.61442608304787,
+      "loop_wall_seconds": 17.93528985977173,
+      "records_seen": 2,
+      "optimizer_steps": 2,
+      "truncated_records": 0,
+      "rejected_records": 0,
+      "peak_rss_bytes": 22316040192,
+      "adapter_sha256": "096ae3becbce08976e9e47ed4f897ca236c593dfd1e00fa8d21a47d3dbb57388",
+      "process_record_sha256": "49915857112c0fd5d288a1b798dd9230bef304f4a6d572f902f20c52e926e705"
+    },
+    "lora-e1": {
+      "returncode": 0,
+      "process_wall_seconds": 745.3438552920707,
+      "loop_wall_seconds": 731.5596611499786,
+      "records_seen": 122,
+      "optimizer_steps": 16,
+      "truncated_records": 0,
+      "rejected_records": 0,
+      "peak_rss_bytes": 25917276160,
+      "adapter_sha256": "1f3cfef26e595397628ccdf756b48bbb45f76bfafb8760a0c9c73c50fd8e46b1",
+      "process_record_sha256": "8904113f8be325e3f6992f89e4c6843ba4067fb72ba5eb4fb02a4c96ae7f1950"
+    },
+    "lora-e2": {
+      "returncode": 0,
+      "process_wall_seconds": 1256.394326458103,
+      "loop_wall_seconds": 1240.6220619678497,
+      "records_seen": 244,
+      "optimizer_steps": 32,
+      "truncated_records": 0,
+      "rejected_records": 0,
+      "peak_rss_bytes": 25918504960,
+      "adapter_sha256": "90ab11c55cb4add5d8c81fdb8ea72d482a13004186e9c930f33b09c0288f1dda",
+      "process_record_sha256": "872bad38c75d7ec5559c4002fe4b5a3fc094118b04094d209f5aa64ebe88d47b"
+    }
+  },
+  "selected_checkpoint": "lora-e1",
+  "development": {
+    "parent": {
+      "correct": 28,
+      "total": 36,
+      "accuracy": 0.7777777777777778,
+      "macro_f1": 0.781328320802005
+    },
+    "lora-e1": {
+      "correct": 28,
+      "total": 36,
+      "accuracy": 0.7777777777777778,
+      "macro_f1": 0.7746031746031746
+    },
+    "lora-e2": {
+      "correct": 24,
+      "total": 36,
+      "accuracy": 0.6666666666666666,
+      "macro_f1": 0.65
+    }
+  },
+  "class_bias": {
+    "high": 0.75,
+    "low": 0.25,
+    "medium": 0.0
+  },
+  "test": {
+    "parent": {
+      "correct": 22,
+      "total": 34,
+      "accuracy": 0.6470588235294118,
+      "macro_f1": 0.6066017316017316,
+      "high_recall": 0.16666666666666666
+    },
+    "parent_class_bias": {
+      "correct": 27,
+      "total": 34,
+      "accuracy": 0.7941176470588235,
+      "macro_f1": 0.7953761214630779,
+      "high_recall": 0.75
+    },
+    "lora-e1": {
+      "correct": 29,
+      "total": 34,
+      "accuracy": 0.8529411764705882,
+      "macro_f1": 0.8537549407114624,
+      "high_recall": 0.8333333333333334
+    }
+  },
+  "validation": {
+    "prediction_comparisons": {
+      "parent-train": {
+        "rows": 122,
+        "same_predictions_as_historical": 122,
+        "max_probability_absolute_difference": 0.0,
+        "sha256": "d6d29a3407f411ae34e61c79e828f5c5fd52956736b29a7e762951c3d3f93c38"
+      },
+      "parent-dev": {
+        "rows": 36,
+        "same_predictions_as_historical": 36,
+        "max_probability_absolute_difference": 0.0,
+        "sha256": "4647d00b3bfc6586f26272a7e02bee16363b2f00b90b80e7a4c3998639751d99"
+      },
+      "lora-e1-dev": {
+        "rows": 36,
+        "same_predictions_as_historical": 36,
+        "max_probability_absolute_difference": 0.0,
+        "sha256": "3499e4f8c52ea0fae9b652c225eea20138bed2de4e7a57eaa1e1255951c62248"
+      },
+      "lora-e2-dev": {
+        "rows": 36,
+        "same_predictions_as_historical": 36,
+        "max_probability_absolute_difference": 0.0,
+        "sha256": "755994a3b03e376cc4a0515a9c57c89b5d8290fa60b3959dd131952fb14b0da7"
+      },
+      "parent-test": {
+        "rows": 34,
+        "same_predictions_as_historical": 34,
+        "max_probability_absolute_difference": 0.0,
+        "sha256": "ad266bbf25e2d8a8c0493f82560faee2c9e3d1976c3c3108c47f57fb631b749c"
+      },
+      "lora-e1-test": {
+        "rows": 34,
+        "same_predictions_as_historical": 34,
+        "max_probability_absolute_difference": 0.0,
+        "sha256": "271034f1a8f08c9fef836e4c49355ec94afb256ec952419ff88278e8e19b71ac"
+      }
+    },
+    "total_model_predictions": 298,
+    "all_predicted_classes_match_historical": true,
+    "all_test_metrics_match_historical": true,
+    "bootstrap_matches_historical": true,
+    "selection_preceded_test_inference": true,
+    "development_and_test_checkpoint_hashes_match": true
+  },
+  "artifacts": {
+    "runs/reproduction/report/summary.json": {
+      "sha256": "d21ccfbc8462780966fe3d0b026924e11771b68138e47d699ecc751403694652"
+    },
+    "runs/reproduction/selection.json": {
+      "sha256": "a6a014324423f3030a19b1f68b61f191868c042124b3710e9547fcb8c1034b45"
+    },
+    "runs/reproduction/report/test_predictions.jsonl": {
+      "sha256": "b96b4b10f06e3b82aefa2b44a84bcf0d8a5ed891d9faafd1ac759ff8a81e41d6"
+    },
+    "runs/reproduction/report/evidence_sha256.json": {
+      "sha256": "4006aac5a4bc44236614a40dcea0738a40e0fe6df12663841575f7cfd743753d"
+    },
+    "runs/reproduction/data_validation.json": {
+      "sha256": "a8ca27f4ff29747876d36cbdd570e9dc8d878c078f5bae898625b7bcf77387d6"
+    },
+    "runs/readme-validation/run-training-and-eval.sh": {
+      "sha256": "46ec8f26af3b6dbf9683d86b81f01c619334a52f91f2b83d3756457d269e31cd"
+    }
+  },
+  "execution_notes": [
+    "The sandbox blocked GitHub and Hugging Face DNS and did not expose MPS. Authorized network and GPU commands ran outside the sandbox.",
+    "The pinned Python environment matched all eight packages in the historical runtime record.",
+    "All training and inference processes ran sequentially.",
+    "No training or evaluation command required a code change.",
+    "The README now identifies training logs, success output, final artifacts, and this verification record."
+  ]
+}

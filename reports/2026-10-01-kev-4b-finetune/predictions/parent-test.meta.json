@@ -1,0 +1,29 @@
+{
+  "checkpoint": "/Users/dm4/work/secondstate/smart-route-bench/runs/2026-10-01-kev-4b-finetune/hf-cache/models--jaredpalmer--kev-4b/snapshots/139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+  "checkpoint_weights_sha256": "90e817356246e7f18bfa7ca3d31794cd4fbeb3332a66a84cb51d9ceae925f2b2",
+  "data_sha256": "7fc9cdfc59a8c7a2f6f0f1543aa0602d1627671af37fbc80cf778b6acb04df1c",
+  "warmup_id": "rc_en_architecture_high_001",
+  "warmup": {
+    "probabilities": {
+      "high": 0.8579003810882568,
+      "low": 0.011903924867510796,
+      "medium": 0.13019579648971558
+    },
+    "logits": {
+      "high": 1.7810642719268799,
+      "low": -2.4965555667877197,
+      "medium": -0.10438430309295654
+    },
+    "forward_ms": 698.6932498402894,
+    "predictor_ms": 700.5812078714371,
+    "input_tokens": 410,
+    "request_sha256": "f7d9fe1eeee33b370bb45f08e326138eb4c09cfafc6b5de5955d98810b3cf473"
+  },
+  "initialization_seconds": 3.694597582798451,
+  "backend": "mlx",
+  "backbone_dtype": "bf16",
+  "temperature": 1.0,
+  "merge": true,
+  "cross_request_prefix_cache": false,
+  "timer": "forward_ms includes model forward, pointer head, softmax and synchronization; predictor_ms also includes parsing and encoding. Neither includes HTTP, initialization or warmup."
+}

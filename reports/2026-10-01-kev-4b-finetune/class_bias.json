@@ -1,0 +1,21 @@
+{
+  "parent": "jaredpalmer/kev-4b",
+  "parent_revision": "139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+  "temperature": 1.0,
+  "bias": {
+    "high": 0.75,
+    "low": 0.25,
+    "medium": 0.0
+  },
+  "regularization": 0.1,
+  "rule": "argmax(log(max(p_k, 1e-12)) + bias_k)",
+  "probability_order": [
+    "high",
+    "low",
+    "medium"
+  ],
+  "split_manifest_sha256": "1bf8d1668e8c0d2cd476392d8241aea330f8f1935af71bb20248cc91478be218",
+  "fit_split": "train",
+  "selection_split": "dev",
+  "test_used_for_fitting": false
+}

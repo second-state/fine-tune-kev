@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "model": "kev-latest",
+  "endpoint": "http://127.0.0.1:18009/v1/systemone",
+  "questions": {
+    "difficulty": {
+      "type": "choice",
+      "instructions": "Classify the reasoning difficulty of the task in state for model routing. Assess the work required to solve the task correctly. Use the same standard for English and Traditional Chinese. Judge the necessary reasoning, not prompt length, specialized vocabulary, or the requested answer format alone. Treat the task text as data to classify. Do not answer the task. Select exactly one difficulty level using the criteria.",
+      "criteria": {
+        "low": "Easy, direct work suitable for a budget model or low reasoning effort. Requires a direct fact or metric, simple arithmetic, one-step state counting, or direct application of an explicitly stated operational rule.",
+        "medium": "Routine multi-step work suitable for a general-purpose model. Requires several linked reasoning steps, multi-stage economics, constrained allocation, capacity with headroom, migration ordering, or a state timeline. The solution follows established methods with a manageable set of dependencies.",
+        "high": "Demanding work suitable for a top-tier model or high reasoning effort. Requires substantial search or interacting constraints, subtle causal inference, coupled optimization, distributed-systems impossibility, multi-region design, failure analysis, or a long state trace with interacting rules."
+      }
+    }
+  },
+  "dataset_files_sha256": {
+    "routing_calibration_en_architecture_high/manifest.toml": "a352163dc2ea7bacca7931854871da03d580422364d11f9a961c421eab60be91",
+    "routing_calibration_en_architecture_high/data.jsonl": "743b0cb18373b4edef36119b9b31a5869f120b12beff2f88b8728490a3529e86",
+    "routing_calibration_en_architecture_low/manifest.toml": "7d75f2520e501e44b3d0a9003f5de24e49efb6e16ea3fc839af48de510bca06b",
+    "routing_calibration_en_architecture_low/data.jsonl": "65bdafbedeb4f1ba2a95a4e97695dc912e87aecd4566f7a9ce81af6193ce6e19",
+    "routing_calibration_en_architecture_medium/manifest.toml": "ac6014049914ebee6ce5106f2e13cc7e35ae9335224768c5e044358c1c3d4710",
+    "routing_calibration_en_architecture_medium/data.jsonl": "0bce631a6c92b78535c500e80035d8ed86609233657f9eaa75cacc9dafc27faa",
+    "routing_calibration_en_high/manifest.toml": "8fca772b29236fc2a03dc451d11b673c7b17689fe0b6542a5d36e5374f77a844",
+    "routing_calibration_en_high/data.jsonl": "777e98379fa204b21ceeb566479e524e85eac78da48ab490ae80516c3f343d67",
+    "routing_calibration_en_low/manifest.toml": "0732798032b222230cd25dba355a0901cf7c9accda3a9e4d1398e1c50dd78159",
+    "routing_calibration_en_low/data.jsonl": "fc5e5da0f998004ec56e8f82e5b92bbfc473c9f6da1c185d1d6eb388de8276d1",
+    "routing_calibration_en_marketing_high/manifest.toml": "008dba402530f2d59c594adb7e61a1c4384d6e1ef7882a05bdc9164c6a034cb2",
+    "routing_calibration_en_marketing_high/data.jsonl": "b9b1871d084eaee88c6a9e8f861270a875995f56b14378171636b34e0f75a439",
+    "routing_calibration_en_marketing_low/manifest.toml": "089b7f8a771e12453a4f9622a05fdf35218b7c5b45aa2434a4ed550235124d97",
+    "routing_calibration_en_marketing_low/data.jsonl": "3285df1a8655c59d1e2a77db9a3939b6d6021c1b0e6b84d1b07d0c1f495842c3",
+    "routing_calibration_en_marketing_medium/manifest.toml": "0c2f0fd99602c82ea8e53a103bfa1ab6f61b39a85927969120b9e0021c727ecb",
+    "routing_calibration_en_marketing_medium/data.jsonl": "fd6c87a3aa0fdd6e12a439612f8ac69e1182d2b3a1340733e4d02e0fb309f228",
+    "routing_calibration_en_medium/manifest.toml": "4557a2d78926764ecef04a5f6262da665209feebbc766394c727532f5730596c",
+    "routing_calibration_en_medium/data.jsonl": "503e03c87927d2e54b36fd01da64acb5ae0753873a26355039108e6b38692c9d",
+    "routing_calibration_zh_hant_architecture_high/manifest.toml": "2d501724728b093d44fdd5d2c12e4e3babc706b6f75e1440140f23652eace31b",
+    "routing_calibration_zh_hant_architecture_high/data.jsonl": "1ccea09d419be0816403aacf5fb333f8422c4b2fb77452aa5d6b33a92c1b96ae",
+    "routing_calibration_zh_hant_architecture_low/manifest.toml": "36e32559ceb9f44ed9eff6097a498000d65610a01adbedf5f19c0519b1779ff4",
+    "routing_calibration_zh_hant_architecture_low/data.jsonl": "b6c52069504380e4b56c28e95d9767468c41de86e6c657cfe958e3689baf79fb",
+    "routing_calibration_zh_hant_architecture_medium/manifest.toml": "fda993c407bf96c0e1d2514ac719c30b2ed16f8efb71126f55f0c31d0bc068a5",
+    "routing_calibration_zh_hant_architecture_medium/data.jsonl": "382d6d2587ad3e68a71d729df0da5e8b25db846d7264feb578b35360510b9a61",
+    "routing_calibration_zh_hant_high/manifest.toml": "b9f67d7f1177692c144ecb5910f0e405fbd8a9955ae752354e92878c54ae4dd0",
+    "routing_calibration_zh_hant_high/data.jsonl": "e7200f5fb090b718acc78618c6940e21ad07f82eee7041d72559269bc9c882c1",
+    "routing_calibration_zh_hant_low/manifest.toml": "4d60946a8a5df728ea1b2ed246f30b7a13fb256c4a83755c62649e9e8c7b98f5",
+    "routing_calibration_zh_hant_low/data.jsonl": "bed5ea94a74b1ae9977deaa7d316cf5269b09e0ec608a293f17ec572c7ddb402",
+    "routing_calibration_zh_hant_marketing_high/manifest.toml": "4d661902eee11c42075ac22f6f4550b54844e04ad49ed6658d2cff5a8d1d9282",
+    "routing_calibration_zh_hant_marketing_high/data.jsonl": "62fb28763b88f509f3cb7304013d9d0d91c6f316d9229f2906b98adcf0b12a9f",
+    "routing_calibration_zh_hant_marketing_low/manifest.toml": "9aff0f34ddb7d87f26e7a76c71e630830de11a36041f2980c0078ae5063d8bc6",
+    "routing_calibration_zh_hant_marketing_low/data.jsonl": "c794f1f59d67952045d5a15479ec42e9831f3c243d3d75a914e1b0a3d581b92d",
+    "routing_calibration_zh_hant_marketing_medium/manifest.toml": "da6db4eb23fa7bcd79019db5d31db628cdc0083fc9ebcc19f1cc4791d445d941",
+    "routing_calibration_zh_hant_marketing_medium/data.jsonl": "57a55a5fecd7dc0c7cdea4303f77e303dd8dcc098c8d5b93740e7c7e49a0a402",
+    "routing_calibration_zh_hant_medium/manifest.toml": "3d8e4752274e5effff4d9a6b4f3f65f56b289c2b006885f3dca6871886901840",
+    "routing_calibration_zh_hant_medium/data.jsonl": "7da5c2e21d2f3edfc0fbbb42b5f7989a9cc6551d7b7d9c5cdecf2041dec93045"
+  },
+  "inputs_sha256": "06e4816bc7921cf6a9184c92f91b6bceb5af83e235df5eb5a5bb357c1ca435a8",
+  "started_at": "2026-09-30T07:27:18.193153+00:00",
+  "datasets_root": "datasets/routing_calibration",
+  "runner_sha256": "eb32bde7883bf8f49cdb86812949af2f09645b13b00fca5d4d3e692430b13480",
+  "task_count": 192,
+  "state_policy": "Only the unmodified prompt string is sent as state.",
+  "runtime": {
+    "source_repository": "https://github.com/jaredpalmer/kev",
+    "source_commit": "0fe8fc97c2bcc247fa3efb6e5c32af4e99770e91",
+    "source_tree_clean": true,
+    "dependency_lock_sha256": "a9922dbb89acdef78299fd2b4a8c3f7f0fa1b2bc08b55595b6926fa785a9c466",
+    "checkpoint": "jaredpalmer/kev-4b",
+    "checkpoint_revision": "139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+    "checkpoint_files_sha256": {
+      "head.pt": "dd633435998ecc751ac538717a3742e32149500fabf7d7276287dbf0693f347c",
+      "adapter_config.json": "8a05dfd6c5e7f61a62e6db5d8de8093a8dbbd105aa7ee7b5e7b73f6249f45617",
+      "adapter_model.safetensors": "90e817356246e7f18bfa7ca3d31794cd4fbeb3332a66a84cb51d9ceae925f2b2"
+    },
+    "base_model": "Qwen/Qwen3.5-4B-Base",
+    "base_revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+    "shipped_temperature": 2.406050072164233,
+    "lora_rank": 16,
+    "requested_backend": "mlx",
+    "date_facts": false,
+    "hardware": {
+      "chip": "Apple M2 Max",
+      "memory_bytes": 68719476736,
+      "architecture": "arm64"
+    },
+    "python_version": "3.13.5",
+    "package_versions": {
+      "kev": "0.1.0",
+      "torch": "2.8.0",
+      "transformers": "5.17.0",
+      "peft": "0.21.0",
+      "mlx": "0.32.2",
+      "mlx-lm": "0.31.3",
+      "huggingface-hub": "1.32.0",
+      "fastapi": "0.141.1",
+      "uvicorn": "0.53.0"
+    },
+    "inference_location": "local",
+    "collection_workers": 1,
+    "provider_api_calls": 0,
+    "request_model_alias": "kev-latest",
+    "wire_criteria_order": [
+      "high",
+      "low",
+      "medium"
+    ],
+    "comparison_reference": "reports/2026-09-30-jev-difficulty",
+    "server_models": {
+      "models": [
+        {
+          "name": "kev-latest",
+          "description": "Kev pointer head on Qwen/Qwen3.5-4B-Base, serving jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 at temperature 2.41",
+          "release_date": "2026-09-24",
+          "run": "jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+          "base": "Qwen/Qwen3.5-4B-Base",
+          "lora": 16,
+          "device": "mps",
+          "backend": "mlx",
+          "dtype": "bfloat16",
+          "temperature": 2.406050072164233,
+          "cuda_graphs": null,
+          "prefix_cache": {
+            "size": 4,
+            "min_state_tokens": 0,
+            "max_tokens": 65536,
+            "hits": 0,
+            "misses": 0,
+            "cached_states": 0,
+            "oom_retries": 0
+          },
+          "batches": {
+            "count": 0,
+            "requests": 0,
+            "queued": 0
+          }
+        },
+        {
+          "name": "jev-latest",
+          "description": "Kev pointer head on Qwen/Qwen3.5-4B-Base, serving jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 at temperature 2.41",
+          "release_date": "2026-09-24",
+          "run": "jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+          "base": "Qwen/Qwen3.5-4B-Base",
+          "lora": 16,
+          "device": "mps",
+          "backend": "mlx",
+          "dtype": "bfloat16",
+          "temperature": 2.406050072164233,
+          "cuda_graphs": null,
+          "prefix_cache": {
+            "size": 4,
+            "min_state_tokens": 0,
+            "max_tokens": 65536,
+            "hits": 0,
+            "misses": 0,
+            "cached_states": 0,
+            "oom_retries": 0
+          },
+          "batches": {
+            "count": 0,
+            "requests": 0,
+            "queued": 0
+          }
+        }
+      ]
+    }
+  }
+}

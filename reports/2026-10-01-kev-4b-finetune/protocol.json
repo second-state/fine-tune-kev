@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "status_at_creation": "Frozen before fine-tuning or candidate predictions",
+  "scope": "Exploratory, single family-disjoint train/dev/test split",
+  "source_commit": "0fe8fc97c2bcc247fa3efb6e5c32af4e99770e91",
+  "base": "Qwen/Qwen3.5-4B-Base",
+  "base_revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+  "parent": "jaredpalmer/kev-4b",
+  "parent_revision": "139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+  "split_seed": 42,
+  "training_seed": 42,
+  "training": {
+    "method": "Warm-start the parent LoRA adapter and pointer head; freeze the backbone",
+    "lora_rank": 16,
+    "lora_targets": "all",
+    "head_dim": 256,
+    "learning_rate": 0.00001,
+    "epochs": [1, 2],
+    "batch": 1,
+    "accum": 8,
+    "device": "mps",
+    "dtype": "fp32",
+    "weights_dtype": "fp32",
+    "checkpointing": true,
+    "none_and_distractor_augmentation": false,
+    "option_permutation": true,
+    "loss": "cross-entropy",
+    "preflight": "Two longest training records, one update per record; discard the probe for model selection"
+  },
+  "selection": {
+    "fine_tuned_checkpoint": "Highest dev macro-F1; then dev accuracy; then fewer epochs",
+    "test_policy": "Score the selected fine-tune, parent, and frozen class-bias baseline once. Do not revise settings based on test results.",
+    "class_bias": "Use parent probabilities at temperature 1. Fit high and low log-probability offsets on train with medium fixed at zero. Grid -3 to 3 in 0.25 increments. Select regularization from 0, 0.001, 0.01, 0.1 on dev macro-F1, then accuracy, then smaller bias norm. Training objective is macro-F1 minus regularization times squared bias norm."
+  },
+  "evaluation": {
+    "backend": "MLX bf16 for every checkpoint, merged adapter, temperature 1",
+    "input": "Original task prompt and unchanged English choice rubric; no labels or metadata in the model input",
+    "primary_metric": "Macro-F1",
+    "secondary_metrics": ["accuracy", "confusion matrix", "per-class recall", "under-routing", "over-routing", "paired-language consistency", "per-domain accuracy"],
+    "latency": "Sequential local inference; warm up on one training record. Save forward timer and end-to-end predictor timer. Exclude initialization and warmup. No HTTP server.",
+    "uncertainty": "Paired family bootstrap, seed 42, 5000 resamples; only five test families, so intervals remain exploratory."
+  },
+  "constraints": [
+    "Only one training or model evaluation process at a time",
+    "No cloud GPU provisioning or model publication",
+    "Keep fine-tuned adapters, heads, logs, and predictions; remove this experiment's downloaded model cache after all evaluation",
+    "All 192 prompts were examined in the previous baseline study. This is not a pristine independent test set.",
+    "No claim about general Kev task retention or production routing cost without separate evaluation"
+  ]
+}

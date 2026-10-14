@@ -1,0 +1,16 @@
+{
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.13.5",
+  "chip": "Apple M2 Max",
+  "memory_bytes": 68719476736,
+  "packages": {
+    "torch": "2.8.0",
+    "transformers": "5.17.0",
+    "peft": "0.21.0",
+    "mlx": "0.32.2",
+    "mlx-lm": "0.31.3",
+    "huggingface-hub": "1.32.0",
+    "datasets": "5.0.1",
+    "accelerate": "1.15.0"
+  }
+}

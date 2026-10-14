@@ -1,0 +1,9 @@
+name = "routing_calibration_zh_hant_low"
+category = "reasoning"
+lang = "zh-Hant"
+scorer = "exact_match"
+extract = "last_number"
+source = "smart-route-bench synthetic matched-pair routing calibration"
+license = "CC0-1.0"
+version = "1.0"
+sample_size = 16
