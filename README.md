@@ -10,6 +10,23 @@ It includes the dataset, fixed data split, training tools, and saved results.
 The experiment measures agreement with difficulty labels.
 It does not measure production routing savings or the quality of model answers.
 
+## Environment
+
+We ran training and evaluation locally on a MacBook Pro with an Apple M2 Max.
+
+| Component | Specification |
+|---|---|
+| CPU | 12 cores: 8 performance and 4 efficiency |
+| GPU | 30 cores |
+| Unified memory | 64 GiB |
+| macOS | 26.6.2 |
+| MLX | 0.32.2 |
+| MLX-LM | 0.31.3 |
+
+Training used PyTorch 2.8.0 with the MPS backend.
+Evaluation used MLX with bfloat16 precision.
+The [runtime record](reports/2026-10-01-kev-4b-finetune/runtime.json) lists the Python version and other package versions.
+
 ## Dataset
 
 We used the project-authored [routing_calibration dataset](datasets/routing_calibration/README.md).
