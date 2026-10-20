@@ -71,7 +71,7 @@ The numeric answer never enters the prepared model input.
 
 ## Original Kev-4B results
 
-The September 30 baseline used the original `jaredpalmer/kev-4b` checkpoint without dataset-specific training or class bias.
+The September 30 baseline used the original `jaredpalmer/kev-4b` checkpoint without dataset-specific training.
 It ran locally through MLX with bfloat16 precision on an Apple M2 Max with 64 GiB of memory.
 
 | Metric on all 192 prompts | Result |
@@ -120,7 +120,7 @@ The split algorithm used domain and difficulty labels to balance the groups.
 The [split manifest](datasets/kev_difficulty/split_manifest.json) fixes every task ID, family, split, and prompt hash.
 Both experiments use identical train, development, and test files.
 Training used only the 122 training prompts.
-Neither model selection nor class-bias fitting used the test labels.
+Training and model selection used no test labels.
 
 | Training configuration | Value |
 |---|---|
@@ -140,18 +140,7 @@ Neither model selection nor class-bias fitting used the test labels.
 Development macro F1 selected one of the two candidates.
 Accuracy and then fewer epochs resolved ties.
 The rule selected the 1-epoch checkpoint for both model sizes.
-The test evaluation then compared that checkpoint with the original model and a separate class-bias baseline.
-
-Class bias keeps the original weights and predicts `argmax(log(p_k) + b_k)`.
-Training predictions determined the offsets, and development predictions selected the regularization.
-The selected offsets differ by model. Both use temperature 1.
-
-| Original model | Low offset | Medium offset | High offset |
-|---|---:|---:|---:|
-| Kev-4B | 0.25 | 0 | 0.75 |
-| Kev-0.8B | -0.5 | 0 | 1.25 |
-
-Each fine-tuned checkpoint uses its own predictions without these offsets.
+The test evaluation then compared that checkpoint with the original model.
 
 ## Fine-tuned results
 
@@ -160,10 +149,8 @@ All methods in this table use the same 34 test prompts:
 | Method | Correct | Accuracy | Macro F1 | High recall |
 |---|---:|---:|---:|---:|
 | Original Kev-4B | 22 / 34 | 64.71% | 0.6066 | 2 / 12 = 16.67% |
-| Original Kev-4B + class bias | 27 / 34 | 79.41% | 0.7954 | 9 / 12 = 75.00% |
 | Fine-tuned Kev-4B, 1 epoch | 29 / 34 | 85.29% | 0.8538 | 10 / 12 = 83.33% |
 | Original Kev-0.8B | 16 / 34 | 47.06% | 0.3897 | 0 / 12 = 0.00% |
-| Original Kev-0.8B + class bias | 24 / 34 | 70.59% | 0.7020 | 8 / 12 = 66.67% |
 | Fine-tuned Kev-0.8B, 1 epoch | 23 / 34 | 67.65% | 0.6684 | 8 / 12 = 66.67% |
 
 The fine-tuned Kev-4B checkpoint gained seven correct predictions, or 20.59 percentage points, over the original Kev-4B model.
@@ -174,12 +161,12 @@ Medium recall decreased from 83.33% to 75.00%.
 The fine-tuned Kev-0.8B checkpoint also gained seven correct predictions, or 20.59 percentage points, over its original model.
 High recall increased from 0 / 12 to 8 / 12.
 Medium recall decreased from 6 / 12 to 5 / 12. Low recall stayed at 100%.
-The 0.8B fine-tune scored one fewer correct prediction than 0.8B class bias and six fewer than the 4B fine-tune.
+The 0.8B fine-tune scored six fewer correct predictions than the 4B fine-tune.
 
 The 0.8B experiment used the fixed 4B recipe. It does not establish the best achievable 0.8B performance.
 
 The 70.83% Kev-4B baseline uses all 192 prompts.
-All six test results use only the 34 test prompts.
+All four test results use only the 34 test prompts.
 The full dataset contains training and development prompts, so it cannot provide an independent score for either fine-tuned checkpoint.
 
 The development results also matter:
@@ -187,23 +174,15 @@ The development results also matter:
 | Method | Development accuracy | Development macro F1 |
 |---|---:|---:|
 | Original Kev-4B | 28 / 36 = 77.78% | 0.7813 |
-| Original Kev-4B + class bias | 33 / 36 = 91.67% | 0.9182 |
 | Fine-tuned Kev-4B, 1 epoch | 28 / 36 = 77.78% | 0.7746 |
 | Fine-tuned Kev-4B, 2 epochs | 24 / 36 = 66.67% | 0.6500 |
 | Original Kev-0.8B | 21 / 36 = 58.33% | 0.4694 |
-| Original Kev-0.8B + class bias | 30 / 36 = 83.33% | 0.8351 |
 | Fine-tuned Kev-0.8B, 1 epoch | 29 / 36 = 80.56% | 0.8038 |
 | Fine-tuned Kev-0.8B, 2 epochs | 27 / 36 = 75.00% | 0.7429 |
 
 The selected 4B checkpoint did not beat the original 4B model on development macro F1.
-The selected 0.8B checkpoint beat its original model but scored below class bias on development macro F1.
+The selected 0.8B checkpoint beat its original model on development macro F1.
 We did not evaluate either rejected 2-epoch checkpoint on the test set.
-
-The 4B test gain over class bias was only two prompts.
-Its 95% interval spans -5.00 to +23.33 percentage points under resampling of the five test families.
-This result does not establish a reliable advantage over class bias.
-The 0.8B fine-tune scored 2.94 percentage points below its class-bias baseline.
-Its corresponding 95% interval spans -11.54 to 0.00 percentage points.
 
 All 192 prompts appeared in the earlier baseline study.
 The test set is an exploratory holdout, even though training and selection kept its records separate.
@@ -226,7 +205,7 @@ The model sizes ran on different dates. These observations do not establish a co
 | Evidence | Kev-4B | Kev-0.8B |
 |---|---|---|
 | Metrics and timings | [Summary](reports/2026-10-01-kev-4b-finetune/summary.json) | [Summary](reports/2026-10-16-kev-0.8b-finetune/summary.json) |
-| Checkpoint and class-bias selection | [Selection](reports/2026-10-01-kev-4b-finetune/selection.json) | [Selection](reports/2026-10-16-kev-0.8b-finetune/selection.json) |
+| Checkpoint selection | [Selection](reports/2026-10-01-kev-4b-finetune/selection.json) | [Selection](reports/2026-10-16-kev-0.8b-finetune/selection.json) |
 | Test predictions | [Predictions](reports/2026-10-01-kev-4b-finetune/test_predictions.jsonl) | [Predictions](reports/2026-10-16-kev-0.8b-finetune/test_predictions.jsonl) |
 
 The [comparison record](reports/2026-10-16-kev-0.8b-finetune/comparison_kev4b.json) contains paired comparisons between the model sizes.
@@ -327,10 +306,10 @@ After the current step succeeds, continue to the next step.
    If you changed `KEV_WORK`, use that directory in the log path.
    Press Ctrl-C to stop the log viewer.
 
-4. Collect the training and development predictions. Freeze the selected checkpoint and class-bias offsets:
+4. Collect the training and development predictions. Freeze the selected checkpoint:
 
    Evaluation reads the checkpoint paths, so it requires no `--protocol` argument.
-   Each experiment fits its own class-bias offsets from its parent predictions.
+   The report tools require the original model predictions on the training and development sets.
 
    ```bash
    export HF_HUB_CACHE="$KEV_WORK/hf-cache"
@@ -366,12 +345,13 @@ After the current step succeeds, continue to the next step.
      --work "$KEV_WORK" --out "$KEV_WORK/report"
    ```
 
-The report command computes all three test results without new model calls.
+The report command computes test metrics from saved predictions without new model calls.
 The training probe uses two training records and does not enter model selection.
 The tools refuse to overwrite existing checkpoints, prediction files, or a frozen selection.
 Generated weights and run files stay under the ignored `runs/` directory.
 The selected checkpoint name is in `$KEV_WORK/selection.json`.
 The final metrics are in `$KEV_WORK/report/summary.json`.
+The `test` object contains metrics under `parent` and the selected checkpoint name.
 The combined test predictions are in `$KEV_WORK/report/test_predictions.jsonl`.
 
 ## Check the data and tools offline
