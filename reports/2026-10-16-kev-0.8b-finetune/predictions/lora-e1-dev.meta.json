@@ -1,0 +1,29 @@
+{
+  "checkpoint": "/Users/dm4/work/secondstate/smart-route-bench/runs/2026-10-16-kev-0.8b-finetune/lora-e1",
+  "checkpoint_weights_sha256": "31d727edfcb78396e46681583bc15c751e6ff3726908793262660790a20c10ee",
+  "data_sha256": "bc9430c319496a269e4918984b745ce3639194478b7992249bc796903ee5e107",
+  "warmup_id": "rc_en_architecture_high_001",
+  "warmup": {
+    "probabilities": {
+      "high": 0.6298427581787109,
+      "low": 0.13870951533317566,
+      "medium": 0.2314477562904358
+    },
+    "logits": {
+      "high": 3.2228779792785645,
+      "low": 1.709789752960205,
+      "medium": 2.22176194190979
+    },
+    "forward_ms": 126.43108307383955,
+    "predictor_ms": 128.1359998974949,
+    "input_tokens": 410,
+    "request_sha256": "f7d9fe1eeee33b370bb45f08e326138eb4c09cfafc6b5de5955d98810b3cf473"
+  },
+  "initialization_seconds": 0.9179942079354078,
+  "backend": "mlx",
+  "backbone_dtype": "bf16",
+  "temperature": 1.0,
+  "merge": true,
+  "cross_request_prefix_cache": false,
+  "timer": "forward_ms includes model forward, pointer head, softmax and synchronization; predictor_ms also includes parsing and encoding. Neither includes HTTP, initialization or warmup."
+}

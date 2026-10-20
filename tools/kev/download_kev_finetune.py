@@ -10,6 +10,8 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--work", type=Path, required=True)
+parser.add_argument("--protocol", type=Path,
+                    default=Path(__file__).resolve().parents[2] / "reports/2026-10-01-kev-4b-finetune/protocol.json")
 args = parser.parse_args()
 WORK = args.work.resolve()
 WORK.mkdir(parents=True, exist_ok=True)
@@ -18,10 +20,8 @@ os.environ["HF_HUB_DISABLE_XET"] = "1"
 os.environ["HF_HUB_DISABLE_IMPLICIT_TOKEN"] = "1"
 from huggingface_hub import HfApi, snapshot_download
 
-MODELS = {
-    "base": ("Qwen/Qwen3.5-4B-Base", "1001bb4d826a52d1f399e183466143f4da7b741b"),
-    "parent": ("jaredpalmer/kev-4b", "139fdd94f1b6a6ad80cc15e08fcb99cac885a101"),
-}
+protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
+MODELS = {key: (protocol[key], protocol[f"{key}_revision"]) for key in ("base", "parent")}
 PATTERNS = ["*.json", "*.safetensors", "*.pt", "*.txt", "*.jinja"]
 infos = {key: HfApi(token=False).model_info(repo, revision=rev, files_metadata=True)
          for key, (repo, rev) in MODELS.items()}
@@ -31,7 +31,8 @@ free = shutil.disk_usage(WORK).free
 if not CACHE.exists() and free < size + 2 * 1024**3:
     raise SystemExit(f"Insufficient headroom: {free=}, {size=}")
 print(f"Download {size / 1024**3:.2f} GiB; free {free / 1024**3:.2f} GiB", flush=True)
-result = {"expected_bytes": size, "free_bytes_before": free, "models": {}}
+result = {"expected_bytes": size, "free_bytes_before": free, "models": {},
+          "protocol_sha256": hashlib.sha256(args.protocol.read_bytes()).hexdigest()}
 start = time.monotonic()
 for key, (repo, rev) in MODELS.items():
     directory = Path(snapshot_download(repo, revision=rev, cache_dir=CACHE,

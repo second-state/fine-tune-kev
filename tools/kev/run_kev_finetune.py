@@ -9,15 +9,26 @@ import time
 from pathlib import Path
 
 
+def validate_download(protocol, download):
+    if set(download["models"]) != {"base", "parent"}:
+        raise ValueError("Pinned model download is incomplete")
+    for key in ("base", "parent"):
+        model = download["models"][key]
+        if (model["repo"], model["revision"]) != (protocol[key], protocol[f"{key}_revision"]):
+            raise ValueError(f"Downloaded {key} differs from the protocol")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--kev-source", type=Path, required=True)
     parser.add_argument("--work", type=Path, required=True)
+    parser.add_argument("--protocol", type=Path,
+                        default=Path(__file__).resolve().parents[2] / "reports/2026-10-01-kev-4b-finetune/protocol.json")
     parser.add_argument("--epochs", type=int, choices=(1, 2), default=1)
     parser.add_argument("--preflight", action="store_true")
     args = parser.parse_args()
     source, work = args.kev_source.resolve(), args.work.resolve()
-    protocol = json.loads((Path(__file__).resolve().parents[2] / "reports/2026-10-01-kev-4b-finetune/protocol.json").read_text())
+    protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
     revision = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
     if revision != protocol["source_commit"]:
         raise ValueError("Kev source revision differs from the protocol")
@@ -28,8 +39,7 @@ def main():
     if out.exists():
         raise ValueError(f"Refusing to overwrite {out}")
     download = json.loads((work / "download.json").read_text())
-    if set(download["models"]) != {"base", "parent"}:
-        raise ValueError("Pinned model download is incomplete")
+    validate_download(protocol, download)
     env = {**os.environ, "HF_HUB_CACHE": str(work / "hf-cache"), "HF_HUB_OFFLINE": "1",
            "HF_HUB_DISABLE_IMPLICIT_TOKEN": "1", "TOKENIZERS_PARALLELISM": "false",
            "PYTHONUNBUFFERED": "1", "PYTHONDONTWRITEBYTECODE": "1"}
@@ -46,6 +56,7 @@ def main():
     if args.preflight:
         command += ["--max_steps", "2"]
     metadata = {"command": command, "source_commit": revision,
+                "protocol_sha256": hashlib.sha256(args.protocol.read_bytes()).hexdigest(),
                 "data_sha256": hashlib.sha256(data.read_bytes()).hexdigest(),
                 "hf_hub_offline": True, "cache": str(work / "hf-cache")}
     record = work / f"{name}.process.json"

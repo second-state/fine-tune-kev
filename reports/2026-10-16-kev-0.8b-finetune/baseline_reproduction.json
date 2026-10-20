@@ -1,0 +1,7 @@
+{
+  "compared": 192,
+  "same_choices": 192,
+  "changed_choices": [],
+  "fresh_parent_correct": 110,
+  "note": "Fresh MLX bf16 choices at temperature 1 compared with the previous shipped-temperature HTTP baseline."
+}

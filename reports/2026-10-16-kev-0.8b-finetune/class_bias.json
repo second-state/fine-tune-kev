@@ -1,0 +1,16 @@
+{
+  "parent": "jaredpalmer/kev-0.8b",
+  "parent_revision": "9a45d25eb2ab761841196625383fa1dff0e56c1e",
+  "temperature": 1.0,
+  "rule": "argmax(log(max(p_k, 1e-12)) + bias_k)",
+  "bias": {
+    "high": 1.25,
+    "low": -0.5,
+    "medium": 0.0
+  },
+  "regularization": 0.0,
+  "fit_split": "train",
+  "regularization_selection_split": "dev",
+  "test_labels_used_for_selection": false,
+  "source": "selection.json"
+}

@@ -7,12 +7,29 @@ from pathlib import Path
 import kev_finetune_eval as evaluation
 import prepare_kev_finetune as preparation
 import report_kev_finetune as reporting
+from run_kev_finetune import validate_download
 from jev_difficulty import QUESTIONS, canonical, load_inputs
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
 class FinetuneDataTests(unittest.TestCase):
+    def test_download_must_match_protocol_model_and_revision(self):
+        protocol = {"base": "Qwen/Qwen3.5-0.8B-Base", "base_revision": "base-pin",
+                    "parent": "jaredpalmer/kev-0.8b", "parent_revision": "parent-pin"}
+        download = {"models": {key: {"repo": protocol[key], "revision": protocol[f"{key}_revision"]}
+                               for key in ("base", "parent")}}
+        validate_download(protocol, download)
+        for key in ("base", "parent"):
+            for field in ("repo", "revision"):
+                with self.subTest(key=key, field=field):
+                    changed = json.loads(json.dumps(download))
+                    changed["models"][key][field] = "different"
+                    with self.assertRaisesRegex(ValueError, f"Downloaded {key}"):
+                        validate_download(protocol, changed)
+        with self.assertRaisesRegex(ValueError, "incomplete"):
+            validate_download(protocol, {"models": {"parent": download["models"]["parent"]}})
+
     def test_split_keeps_pairs_and_families_together_and_preserves_inputs(self):
         tasks, _ = load_inputs(ROOT / "datasets/routing_calibration")
         originals = {t["task_id"]: t for t in tasks}

@@ -4,7 +4,8 @@
   "copied_on": "2026-10-13",
   "historical_experiment_dates": [
     "2026-09-30",
-    "2026-10-01"
+    "2026-10-01",
+    "2026-10-16"
   ],
   "dataset_license": "CC0-1.0, as declared in each original manifest",
   "files": {
@@ -286,11 +287,15 @@
     },
     "tools/kev/download_kev_finetune.py": {
       "source_path": "tools/key-survey/download_kev_finetune.py",
-      "sha256": "cd946ce81dd28516b83183faf67efc4bd532b049345a60ee07ad7b691ea09831"
+      "sha256": "2d691be58a34e0695751c7ba42b7176d1133b89ebd5851ef32a6316240dfb8b2",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
     },
     "tools/kev/run_kev_finetune.py": {
       "source_path": "tools/key-survey/run_kev_finetune.py",
-      "sha256": "954e93291d874f317a87c54b48cdb01b85bf4a488cf061292381dc80345e8693"
+      "sha256": "4d562dbc05c4b9c447599be6926d8c2ff0daeddfa43e1ae4278ccad4f1d5c26b",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
     },
     "tools/kev/kev_finetune_eval.py": {
       "source_path": "tools/key-survey/kev_finetune_eval.py",
@@ -310,13 +315,154 @@
     },
     "tools/kev/test_kev_finetune.py": {
       "source_path": "tools/key-survey/test_kev_finetune.py",
-      "sha256": "4aa0f37ce8d0387c749c08a27249cbcbe1e487c84ef7d87669286c70618654e6"
+      "sha256": "857a3d9a1e4fd61ce071fcfd74c098b7161f5e9989a2fdb9f4cd7bbc15d02605",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/summary.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/summary.json",
+      "sha256": "e6530bfa178d4de32000dd50f8efc9e855b86eecc4863be895676f848ce0ee0b",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/class_bias.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/class_bias.json",
+      "sha256": "7b0e2983cd758c2a1ccd217426696a5b47c42d54b6833505f4a10108c132a2aa",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/runtime.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/runtime.json",
+      "sha256": "231363d24993497c5369b36c9ef2569261693d238beb5f31927c259efcf3e7a4",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/data_validation.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/data_validation.json",
+      "sha256": "32503c628354d5845632219c73aa22f59f1c2bdba3267178f2404d5390437ffc",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/selection.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/selection.json",
+      "sha256": "903a8290e3758e86e41c8a1d1964cb376599d97e5b45c14a81ae16f767724483",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/protocol.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/protocol.json",
+      "sha256": "8af02f68dc72b83a3f08a479e75baf0ea5a00f8d3bbdd04422302538e27288f7",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/baseline_reproduction.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/baseline_reproduction.json",
+      "sha256": "650b3c96e9992d6823d4cf9b3c2dcce57659e51c8ab83eee4cb898baeb6710cd",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/split_manifest.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/split_manifest.json",
+      "sha256": "1bf8d1668e8c0d2cd476392d8241aea330f8f1935af71bb20248cc91478be218",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/test_predictions.jsonl": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/test_predictions.jsonl",
+      "sha256": "374f457072549300884b8a6ff625a6a1dd5602b6b2f0d6f51ab3a68c7b4d9a4b",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-dev.meta.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-dev.meta.json",
+      "sha256": "74b304812315712176247cf71f387f983c020d05927d38f48faa65909b11ddb5",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-dev.meta.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-dev.meta.json",
+      "sha256": "66a939c26fb9564f09ca1b7a3a59d0c821fe9c5164977322b2b1b5f2ff642e0d",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e2-dev.meta.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e2-dev.meta.json",
+      "sha256": "004906d2c9244efaa172019b46b68e3fb4346bbc94181d22db0fa8c99aadd084",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-dev.jsonl": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-dev.jsonl",
+      "sha256": "a367cfdf4997379baf4f3846802c8293af89182a96dab48ee8c40f323e912ed2",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-dev.jsonl": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-dev.jsonl",
+      "sha256": "d8c86a779cdc5c0e5434021adc85cd1ec995c88cdcafc256124c913168a43569",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-train.meta.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-train.meta.json",
+      "sha256": "7e3d4d81b55d5c8c3adee96d30e720b22d2c66e6ed02e9a320d7a8159b79f48d",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e2-dev.jsonl": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e2-dev.jsonl",
+      "sha256": "ffe9136033e106d9204e33602c10e4806782fbaa9856ebdf9a3612d2a7b487e9",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-test.jsonl": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-test.jsonl",
+      "sha256": "24d82cca7a18223f6fca10add1352eb8a464c644e4e144d8bd24d6aa51b06409",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-train.jsonl": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-train.jsonl",
+      "sha256": "f97a426e009b8b73a9b415acd8e3f6bfda033eaa1bd61a8407093550dacc2188",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-test.meta.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/lora-e1-test.meta.json",
+      "sha256": "93702b4d5c9f11abb1cb97b03a76fa0cc9b26197a66d5e83edd6c9d1fd27f641",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-test.jsonl": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-test.jsonl",
+      "sha256": "2825ae94dd7bd8a496c2a642a3acf63693109c40cd5c34c9bd83f62ad6911c1c",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-test.meta.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/predictions/parent-test.meta.json",
+      "sha256": "ab6eba4618c41b617ce6c7f85bd853450e642bcf0226aebc4af31ec7314dca94",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/download.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/download.json",
+      "sha256": "e8f54b360128a6eb05d5614113feea633ad2d5fe15c2e815f07630a4332c989b",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
+    },
+    "reports/2026-10-16-kev-0.8b-finetune/comparison_kev4b.json": {
+      "source_path": "reports/2026-10-16-kev-0.8b-finetune/comparison_kev4b.json",
+      "sha256": "89e7ee2c90093e8d754846d8c095a0ccfa2e365e43cefb774bc97bbade7d44bd",
+      "source_commit": "6875e98690cb246082df54660f28c474a68ad6aa",
+      "copied_on": "2026-10-20"
     }
   },
   "notes": [
     "Raw dataset files, prepared splits, saved JSON evidence, and Python helpers are byte-for-byte copies.",
     "The prepared splits come from the retained local run. Their hashes match the committed split manifest.",
     "Historical JSON metadata keeps paths from the original experiment. New run commands use this repository.",
-    "Model weights, trained adapters, and Python environments are not included."
+    "Model weights, trained adapters, and Python environments are not included.",
+    "Per-file source_commit and copied_on values override the original import defaults."
   ]
 }

@@ -1,18 +1,19 @@
-# Fine-tune Kev-4B for prompt difficulty
+# Fine-tune Kev for prompt difficulty
 
 We want to route each LLM API call to a model based on the prompt content.
-Kev-4B classifies the prompt as `low`, `medium`, or `high` difficulty.
+Kev-4B and Kev-0.8B classify the prompt as `low`, `medium`, or `high` difficulty.
 A routing rule can then select a budget, general-purpose, or premium model.
 The goal is to reduce API cost while keeping the required answer quality.
 
-This repository records the October 1, 2026 experiment from `smart-route-bench`.
+This repository records two experiments from `smart-route-bench`.
+The Kev-4B experiment ran on October 1, 2026. The Kev-0.8B experiment ran on October 16, 2026.
 It includes the dataset, fixed data split, training tools, and saved results.
-The experiment measures agreement with difficulty labels.
-It does not measure production routing savings or the quality of model answers.
+Both experiments measure agreement with difficulty labels.
+They do not measure production routing savings or the quality of model answers.
 
 ## Environment
 
-We ran training and evaluation locally on a MacBook Pro with an Apple M2 Max.
+We ran both experiments locally on a MacBook Pro with an Apple M2 Max.
 
 | Component | Specification |
 |---|---|
@@ -25,7 +26,7 @@ We ran training and evaluation locally on a MacBook Pro with an Apple M2 Max.
 
 Training used PyTorch 2.8.0 with the MPS backend.
 Evaluation used MLX with bfloat16 precision.
-The [runtime record](reports/2026-10-01-kev-4b-finetune/runtime.json) lists the Python version and other package versions.
+The [4B runtime record](reports/2026-10-01-kev-4b-finetune/runtime.json) and [0.8B runtime record](reports/2026-10-16-kev-0.8b-finetune/runtime.json) list identical Python and package versions.
 
 ## Dataset
 
@@ -93,12 +94,19 @@ The [baseline summary](reports/2026-09-30-kev-4b-difficulty/summary.json) and [1
 
 ## Fine-tuning method
 
-Kev-4B combines Qwen3.5-4B-Base, a LoRA adapter, and a pointer head that scores the class options.
+Both Kev models combine a Qwen3.5 base model, a LoRA adapter, and a pointer head that scores the class options.
+
+| Kev checkpoint | Base model |
+|---|---|
+| `jaredpalmer/kev-4b` | `Qwen/Qwen3.5-4B-Base` |
+| `jaredpalmer/kev-0.8b` | `Qwen/Qwen3.5-0.8B-Base` |
+
 The trainer kept the base weights fixed.
 It continued training the existing adapter and pointer head from the original Kev checkpoint.
 A checkpoint stores the resulting adapter, head, and configuration.
 
-We froze the [protocol](reports/2026-10-01-kev-4b-finetune/protocol.json) before training and candidate evaluation.
+We froze each protocol before training and candidate evaluation.
+The [4B protocol](reports/2026-10-01-kev-4b-finetune/protocol.json) and [0.8B protocol](reports/2026-10-16-kev-0.8b-finetune/protocol.json) use the same training configuration and selection rules.
 We grouped related scenarios into 28 families.
 Each family and each translation pair stayed in one split.
 The split algorithm used domain and difficulty labels to balance the groups.
@@ -110,6 +118,7 @@ The split algorithm used domain and difficulty labels to balance the groups.
 | Test | 34 | 17 | 5 | 10 / 12 / 12 |
 
 The [split manifest](datasets/kev_difficulty/split_manifest.json) fixes every task ID, family, split, and prompt hash.
+Both experiments use identical train, development, and test files.
 Training used only the 122 training prompts.
 Neither model selection nor class-bias fitting used the test labels.
 
@@ -130,13 +139,19 @@ Neither model selection nor class-bias fitting used the test labels.
 
 Development macro F1 selected one of the two candidates.
 Accuracy and then fewer epochs resolved ties.
-The rule selected the 1-epoch checkpoint.
+The rule selected the 1-epoch checkpoint for both model sizes.
 The test evaluation then compared that checkpoint with the original model and a separate class-bias baseline.
 
 Class bias keeps the original weights and predicts `argmax(log(p_k) + b_k)`.
 Training predictions determined the offsets, and development predictions selected the regularization.
-The selected offsets were `low=0.25`, `medium=0`, and `high=0.75` at temperature 1.
-The fine-tuned checkpoint uses its own predictions without these offsets.
+The selected offsets differ by model. Both use temperature 1.
+
+| Original model | Low offset | Medium offset | High offset |
+|---|---:|---:|---:|
+| Kev-4B | 0.25 | 0 | 0.75 |
+| Kev-0.8B | -0.5 | 0 | 1.25 |
+
+Each fine-tuned checkpoint uses its own predictions without these offsets.
 
 ## Fine-tuned results
 
@@ -147,15 +162,25 @@ All methods in this table use the same 34 test prompts:
 | Original Kev-4B | 22 / 34 | 64.71% | 0.6066 | 2 / 12 = 16.67% |
 | Original Kev-4B + class bias | 27 / 34 | 79.41% | 0.7954 | 9 / 12 = 75.00% |
 | Fine-tuned Kev-4B, 1 epoch | 29 / 34 | 85.29% | 0.8538 | 10 / 12 = 83.33% |
+| Original Kev-0.8B | 16 / 34 | 47.06% | 0.3897 | 0 / 12 = 0.00% |
+| Original Kev-0.8B + class bias | 24 / 34 | 70.59% | 0.7020 | 8 / 12 = 66.67% |
+| Fine-tuned Kev-0.8B, 1 epoch | 23 / 34 | 67.65% | 0.6684 | 8 / 12 = 66.67% |
 
-The fine-tuned checkpoint gained seven correct predictions, or 20.59 percentage points, over the original model.
+The fine-tuned Kev-4B checkpoint gained seven correct predictions, or 20.59 percentage points, over the original Kev-4B model.
 It corrected eight high-to-medium errors and introduced one medium-to-high error.
 Low recall stayed at 100%.
 Medium recall decreased from 83.33% to 75.00%.
 
-The 70.83% baseline uses all 192 prompts.
-The 64.71% and 85.29% results use only the 34 test prompts.
-The full dataset contains training and development prompts, so it cannot provide an independent score for the fine-tuned checkpoint.
+The fine-tuned Kev-0.8B checkpoint also gained seven correct predictions, or 20.59 percentage points, over its original model.
+High recall increased from 0 / 12 to 8 / 12.
+Medium recall decreased from 6 / 12 to 5 / 12. Low recall stayed at 100%.
+The 0.8B fine-tune scored one fewer correct prediction than 0.8B class bias and six fewer than the 4B fine-tune.
+
+The 0.8B experiment used the fixed 4B recipe. It does not establish the best achievable 0.8B performance.
+
+The 70.83% Kev-4B baseline uses all 192 prompts.
+All six test results use only the 34 test prompts.
+The full dataset contains training and development prompts, so it cannot provide an independent score for either fine-tuned checkpoint.
 
 The development results also matter:
 
@@ -165,38 +190,59 @@ The development results also matter:
 | Original Kev-4B + class bias | 33 / 36 = 91.67% | 0.9182 |
 | Fine-tuned Kev-4B, 1 epoch | 28 / 36 = 77.78% | 0.7746 |
 | Fine-tuned Kev-4B, 2 epochs | 24 / 36 = 66.67% | 0.6500 |
+| Original Kev-0.8B | 21 / 36 = 58.33% | 0.4694 |
+| Original Kev-0.8B + class bias | 30 / 36 = 83.33% | 0.8351 |
+| Fine-tuned Kev-0.8B, 1 epoch | 29 / 36 = 80.56% | 0.8038 |
+| Fine-tuned Kev-0.8B, 2 epochs | 27 / 36 = 75.00% | 0.7429 |
 
-The selected checkpoint did not beat the original model on development macro F1.
-We did not evaluate the rejected 2-epoch checkpoint on the test set.
-The test gain over class bias was only two prompts.
+The selected 4B checkpoint did not beat the original 4B model on development macro F1.
+The selected 0.8B checkpoint beat its original model but scored below class bias on development macro F1.
+We did not evaluate either rejected 2-epoch checkpoint on the test set.
+
+The 4B test gain over class bias was only two prompts.
 Its 95% interval spans -5.00 to +23.33 percentage points under resampling of the five test families.
 This result does not establish a reliable advantage over class bias.
+The 0.8B fine-tune scored 2.94 percentage points below its class-bias baseline.
+Its corresponding 95% interval spans -11.54 to 0.00 percentage points.
 
 All 192 prompts appeared in the earlier baseline study.
 The test set is an exploratory holdout, even though training and selection kept its records separate.
 New scenario families and real requests remain necessary to measure performance on new data.
 
-Both models used MLX bfloat16 and temperature 1 for the test comparison.
-The earlier full-dataset HTTP baseline used the shipped temperature of about 2.40605.
-The fresh original model produced the same class on all 192 prompts, as recorded in [baseline_reproduction.json](reports/2026-10-01-kev-4b-finetune/baseline_reproduction.json).
+All checkpoints used MLX bfloat16 and temperature 1 for the test comparison.
+The earlier Kev-4B full-dataset HTTP baseline used the shipped temperature of about 2.40605.
+Fresh original Kev-4B inference produced the same class on all 192 prompts, as recorded in [baseline_reproduction.json](reports/2026-10-01-kev-4b-finetune/baseline_reproduction.json).
 
-The 1-epoch training loop took 688.94 seconds on the M2 Max.
-The full training process took 705.89 seconds, with a peak process RSS of about 24.11 GiB.
-The original and fine-tuned predictors averaged 778.60 ms and 727.60 ms per test prompt.
-These timers exclude HTTP, model loading, and warmup.
-One run per model does not establish a speed improvement.
+| Model | 1-epoch training loop | Full training process | Original predictor mean | Fine-tuned predictor mean |
+|---|---:|---:|---:|---:|
+| Kev-4B | 688.94 s | 705.89 s | 778.60 ms | 727.60 ms |
+| Kev-0.8B | 206.59 s | 211.92 s | 93.89 ms | 100.37 ms |
 
-The [fine-tuning summary](reports/2026-10-01-kev-4b-finetune/summary.json), [selection record](reports/2026-10-01-kev-4b-finetune/selection.json), and [test predictions](reports/2026-10-01-kev-4b-finetune/test_predictions.jsonl) provide the evidence.
+The full training process includes startup, model loading, training, and checkpoint saving.
+The 4B process used a peak RSS of about 24.11 GiB.
+Predictor times cover the same 34 test prompts and exclude HTTP, model loading, and warmup.
+The model sizes ran on different dates. These observations do not establish a controlled speed comparison.
+
+| Evidence | Kev-4B | Kev-0.8B |
+|---|---|---|
+| Metrics and timings | [Summary](reports/2026-10-01-kev-4b-finetune/summary.json) | [Summary](reports/2026-10-16-kev-0.8b-finetune/summary.json) |
+| Checkpoint and class-bias selection | [Selection](reports/2026-10-01-kev-4b-finetune/selection.json) | [Selection](reports/2026-10-16-kev-0.8b-finetune/selection.json) |
+| Test predictions | [Predictions](reports/2026-10-01-kev-4b-finetune/test_predictions.jsonl) | [Predictions](reports/2026-10-16-kev-0.8b-finetune/test_predictions.jsonl) |
+
+The [comparison record](reports/2026-10-16-kev-0.8b-finetune/comparison_kev4b.json) contains paired comparisons between the model sizes.
 
 ## Run the experiment
 
 These commands reproduce the Apple Silicon workflow with the original model revisions.
+The commands default to Kev-4B. For Kev-0.8B, use the alternative variables in step 1 before continuing to step 2.
+Both sizes use the same environment, data, training configuration, and evaluation commands.
+
 The recorded machine used macOS, an M2 Max, and 64 GiB of memory.
-The model download requires about 8.85 GiB of disk space, plus space for the Python environment and trained checkpoints.
-The [runtime record](reports/2026-10-01-kev-4b-finetune/runtime.json) lists the dependency versions.
+The model downloads require about 8.85 GiB for 4B or 1.71 GiB for 0.8B.
+The Python environment and trained checkpoints require additional disk space.
 New training runs can produce different weights and predictions.
 
-The [October 13, 2026 reproduction check](reports/2026-10-13-readme-reproduction/verification.json) completed all five steps on this hardware.
+The [October 13, 2026 reproduction check](reports/2026-10-13-readme-reproduction/verification.json) completed all five 4B steps on this hardware.
 All 298 prediction distributions matched the October 1 run exactly.
 Training and evaluation took about 39 minutes, excluding setup and downloads.
 
@@ -205,6 +251,8 @@ Training and evaluation took about 39 minutes, excluding setup and downloads.
 | Kev source | `0fe8fc97c2bcc247fa3efb6e5c32af4e99770e91` |
 | `jaredpalmer/kev-4b` | `139fdd94f1b6a6ad80cc15e08fcb99cac885a101` |
 | `Qwen/Qwen3.5-4B-Base` | `1001bb4d826a52d1f399e183466143f4da7b741b` |
+| `jaredpalmer/kev-0.8b` | `9a45d25eb2ab761841196625383fa1dff0e56c1e` |
+| `Qwen/Qwen3.5-0.8B-Base` | `dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68` |
 
 Run each step from this repository root in the same shell.
 Use a new work directory for each experiment.
@@ -213,10 +261,13 @@ After the current step succeeds, continue to the next step.
 
 1. Install `uv` and Python 3.13.5. Create the pinned Kev environment:
 
+   If the pinned Kev checkout and environment already exist, skip the clone and environment setup commands.
+
    ```bash
    KEV_PROJECT="$PWD"
    KEV_SOURCE="$KEV_PROJECT/runs/kev-source"
    KEV_WORK="$KEV_PROJECT/runs/reproduction"
+   KEV_PROTOCOL="$KEV_PROJECT/reports/2026-10-01-kev-4b-finetune/protocol.json"
    mkdir -p "$KEV_PROJECT/runs"
    git clone https://github.com/jaredpalmer/kev.git "$KEV_SOURCE"
    git -C "$KEV_SOURCE" checkout --detach 0fe8fc97c2bcc247fa3efb6e5c32af4e99770e91
@@ -226,24 +277,38 @@ After the current step succeeds, continue to the next step.
    )
    ```
 
+   For Kev-0.8B, replace the work directory and protocol before step 2:
+
+   ```bash
+   KEV_WORK="$KEV_PROJECT/runs/reproduction-0.8b"
+   KEV_PROTOCOL="$KEV_PROJECT/reports/2026-10-16-kev-0.8b-finetune/protocol.json"
+   ```
+
+   The protocol selects the base model, original checkpoint, and their pinned revisions.
+   The remaining commands use these variables for either model size.
+
 2. Copy the fixed split. Download the pinned base and original Kev checkpoint:
 
    ```bash
    mkdir -p "$KEV_WORK"
    cp -R datasets/kev_difficulty "$KEV_WORK/data"
+   unset HF_HUB_OFFLINE
    "$KEV_SOURCE/.venv/bin/python" tools/kev/download_kev_finetune.py \
-     --work "$KEV_WORK"
+     --work "$KEV_WORK" --protocol "$KEV_PROTOCOL"
    ```
 
 3. Run the two-record training probe. Train both candidates independently:
 
    ```bash
    python3 tools/kev/run_kev_finetune.py \
-     --kev-source "$KEV_SOURCE" --work "$KEV_WORK" --preflight
+     --kev-source "$KEV_SOURCE" --work "$KEV_WORK" \
+     --protocol "$KEV_PROTOCOL" --preflight
    python3 tools/kev/run_kev_finetune.py \
-     --kev-source "$KEV_SOURCE" --work "$KEV_WORK" --epochs 1
+     --kev-source "$KEV_SOURCE" --work "$KEV_WORK" \
+     --protocol "$KEV_PROTOCOL" --epochs 1
    python3 tools/kev/run_kev_finetune.py \
-     --kev-source "$KEV_SOURCE" --work "$KEV_WORK" --epochs 2
+     --kev-source "$KEV_SOURCE" --work "$KEV_WORK" \
+     --protocol "$KEV_PROTOCOL" --epochs 2
    ```
 
    Each command prints its return code and elapsed time after training ends.
@@ -258,10 +323,14 @@ After the current step succeeds, continue to the next step.
    ```
 
    Use `preflight.log` or `lora-e2.log` for the other commands.
+   The 0.8B log path is `runs/reproduction-0.8b/lora-e1.log`.
    If you changed `KEV_WORK`, use that directory in the log path.
    Press Ctrl-C to stop the log viewer.
 
 4. Collect the training and development predictions. Freeze the selected checkpoint and class-bias offsets:
+
+   Evaluation reads the checkpoint paths, so it requires no `--protocol` argument.
+   Each experiment fits its own class-bias offsets from its parent predictions.
 
    ```bash
    export HF_HUB_CACHE="$KEV_WORK/hf-cache"
@@ -322,14 +391,15 @@ python3 -B tools/kev/prepare_kev_finetune.py --out runs/data-check
 ```
 
 The frozen manifest records the SHA-256 of each generated file.
-[provenance.json](provenance.json) records the source commit and hashes of all copied data, evidence, and tools.
+[provenance.json](provenance.json) records the source commits and hashes of all copied data, evidence, and tools.
 Historical JSON files retain paths from the original experiment.
 The commands in this README use paths inside this repository.
 
 ## Source reports
 
-The source reports explain the original baseline, research plan, and completed experiment:
+The source reports explain the original baseline, research plan, and completed experiments:
 
 - [Original Kev-4B benchmark](https://github.com/second-state/smart-route-bench/blob/64ccb3ad6d112f87ae17a3d37d91cfa5716d3efc/reports/2026-09-30-kev-4b-difficulty/README.md)
 - [Fine-tuning feasibility study](https://github.com/second-state/smart-route-bench/blob/64ccb3ad6d112f87ae17a3d37d91cfa5716d3efc/reports/2026-10-01-kev-4b-finetune-research/README.md)
-- [Completed fine-tuning experiment](https://github.com/second-state/smart-route-bench/blob/64ccb3ad6d112f87ae17a3d37d91cfa5716d3efc/reports/2026-10-01-kev-4b-finetune/README.md).
+- [Completed Kev-4B fine-tuning experiment](https://github.com/second-state/smart-route-bench/blob/64ccb3ad6d112f87ae17a3d37d91cfa5716d3efc/reports/2026-10-01-kev-4b-finetune/README.md)
+- [Completed Kev-0.8B fine-tuning experiment](https://github.com/second-state/smart-route-bench/blob/6875e98690cb246082df54660f28c474a68ad6aa/reports/2026-10-16-kev-0.8b-finetune/README.md).

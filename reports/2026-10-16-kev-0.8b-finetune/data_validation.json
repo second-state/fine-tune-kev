@@ -1,0 +1,996 @@
+{
+  "train_serve_identical_tokens": 192,
+  "unchanged_requests": 192,
+  "context": {
+    "max_state": 384,
+    "max_branch": 1024,
+    "max_packed": 2048
+  },
+  "option_order": [
+    "high",
+    "low",
+    "medium"
+  ],
+  "max_packed_tokens": 536,
+  "records_checked": [
+    {
+      "id": "rc_en_architecture_high_001",
+      "split": "train",
+      "tokens": 410
+    },
+    {
+      "id": "rc_en_architecture_high_005",
+      "split": "train",
+      "tokens": 452
+    },
+    {
+      "id": "rc_en_architecture_high_006",
+      "split": "train",
+      "tokens": 358
+    },
+    {
+      "id": "rc_en_architecture_high_007",
+      "split": "train",
+      "tokens": 384
+    },
+    {
+      "id": "rc_en_architecture_low_001",
+      "split": "train",
+      "tokens": 333
+    },
+    {
+      "id": "rc_en_architecture_low_002",
+      "split": "train",
+      "tokens": 331
+    },
+    {
+      "id": "rc_en_architecture_low_005",
+      "split": "train",
+      "tokens": 299
+    },
+    {
+      "id": "rc_en_architecture_low_006",
+      "split": "train",
+      "tokens": 323
+    },
+    {
+      "id": "rc_en_architecture_low_007",
+      "split": "train",
+      "tokens": 315
+    },
+    {
+      "id": "rc_en_architecture_medium_004",
+      "split": "train",
+      "tokens": 351
+    },
+    {
+      "id": "rc_en_architecture_medium_005",
+      "split": "train",
+      "tokens": 366
+    },
+    {
+      "id": "rc_en_architecture_medium_006",
+      "split": "train",
+      "tokens": 365
+    },
+    {
+      "id": "rc_en_architecture_medium_007",
+      "split": "train",
+      "tokens": 329
+    },
+    {
+      "id": "rc_en_high_004",
+      "split": "train",
+      "tokens": 392
+    },
+    {
+      "id": "rc_en_high_005",
+      "split": "train",
+      "tokens": 387
+    },
+    {
+      "id": "rc_en_high_006",
+      "split": "train",
+      "tokens": 364
+    },
+    {
+      "id": "rc_en_high_009",
+      "split": "train",
+      "tokens": 352
+    },
+    {
+      "id": "rc_en_high_010",
+      "split": "train",
+      "tokens": 341
+    },
+    {
+      "id": "rc_en_high_011",
+      "split": "train",
+      "tokens": 378
+    },
+    {
+      "id": "rc_en_high_012",
+      "split": "train",
+      "tokens": 385
+    },
+    {
+      "id": "rc_en_high_013",
+      "split": "train",
+      "tokens": 352
+    },
+    {
+      "id": "rc_en_high_014",
+      "split": "train",
+      "tokens": 327
+    },
+    {
+      "id": "rc_en_high_015",
+      "split": "train",
+      "tokens": 349
+    },
+    {
+      "id": "rc_en_high_016",
+      "split": "train",
+      "tokens": 384
+    },
+    {
+      "id": "rc_en_low_001",
+      "split": "train",
+      "tokens": 259
+    },
+    {
+      "id": "rc_en_low_002",
+      "split": "train",
+      "tokens": 259
+    },
+    {
+      "id": "rc_en_low_003",
+      "split": "train",
+      "tokens": 258
+    },
+    {
+      "id": "rc_en_low_006",
+      "split": "train",
+      "tokens": 279
+    },
+    {
+      "id": "rc_en_low_007",
+      "split": "train",
+      "tokens": 280
+    },
+    {
+      "id": "rc_en_low_009",
+      "split": "train",
+      "tokens": 271
+    },
+    {
+      "id": "rc_en_low_010",
+      "split": "train",
+      "tokens": 281
+    },
+    {
+      "id": "rc_en_low_012",
+      "split": "train",
+      "tokens": 265
+    },
+    {
+      "id": "rc_en_low_014",
+      "split": "train",
+      "tokens": 265
+    },
+    {
+      "id": "rc_en_low_015",
+      "split": "train",
+      "tokens": 272
+    },
+    {
+      "id": "rc_en_marketing_high_001",
+      "split": "train",
+      "tokens": 460
+    },
+    {
+      "id": "rc_en_marketing_high_002",
+      "split": "train",
+      "tokens": 428
+    },
+    {
+      "id": "rc_en_marketing_high_003",
+      "split": "train",
+      "tokens": 402
+    },
+    {
+      "id": "rc_en_marketing_high_005",
+      "split": "train",
+      "tokens": 384
+    },
+    {
+      "id": "rc_en_marketing_high_006",
+      "split": "train",
+      "tokens": 455
+    },
+    {
+      "id": "rc_en_marketing_low_001",
+      "split": "train",
+      "tokens": 289
+    },
+    {
+      "id": "rc_en_marketing_low_002",
+      "split": "train",
+      "tokens": 280
+    },
+    {
+      "id": "rc_en_marketing_low_003",
+      "split": "train",
+      "tokens": 298
+    },
+    {
+      "id": "rc_en_marketing_low_004",
+      "split": "train",
+      "tokens": 297
+    },
+    {
+      "id": "rc_en_marketing_low_006",
+      "split": "train",
+      "tokens": 289
+    },
+    {
+      "id": "rc_en_marketing_low_007",
+      "split": "train",
+      "tokens": 296
+    },
+    {
+      "id": "rc_en_marketing_medium_001",
+      "split": "train",
+      "tokens": 369
+    },
+    {
+      "id": "rc_en_marketing_medium_002",
+      "split": "train",
+      "tokens": 350
+    },
+    {
+      "id": "rc_en_marketing_medium_003",
+      "split": "train",
+      "tokens": 363
+    },
+    {
+      "id": "rc_en_marketing_medium_005",
+      "split": "train",
+      "tokens": 367
+    },
+    {
+      "id": "rc_en_marketing_medium_006",
+      "split": "train",
+      "tokens": 340
+    },
+    {
+      "id": "rc_en_medium_002",
+      "split": "train",
+      "tokens": 381
+    },
+    {
+      "id": "rc_en_medium_003",
+      "split": "train",
+      "tokens": 349
+    },
+    {
+      "id": "rc_en_medium_004",
+      "split": "train",
+      "tokens": 292
+    },
+    {
+      "id": "rc_en_medium_005",
+      "split": "train",
+      "tokens": 302
+    },
+    {
+      "id": "rc_en_medium_006",
+      "split": "train",
+      "tokens": 312
+    },
+    {
+      "id": "rc_en_medium_007",
+      "split": "train",
+      "tokens": 365
+    },
+    {
+      "id": "rc_en_medium_008",
+      "split": "train",
+      "tokens": 334
+    },
+    {
+      "id": "rc_en_medium_010",
+      "split": "train",
+      "tokens": 319
+    },
+    {
+      "id": "rc_en_medium_012",
+      "split": "train",
+      "tokens": 284
+    },
+    {
+      "id": "rc_en_medium_013",
+      "split": "train",
+      "tokens": 287
+    },
+    {
+      "id": "rc_en_medium_016",
+      "split": "train",
+      "tokens": 309
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_001",
+      "split": "train",
+      "tokens": 403
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_005",
+      "split": "train",
+      "tokens": 471
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_006",
+      "split": "train",
+      "tokens": 380
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_007",
+      "split": "train",
+      "tokens": 420
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_001",
+      "split": "train",
+      "tokens": 337
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_002",
+      "split": "train",
+      "tokens": 328
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_005",
+      "split": "train",
+      "tokens": 307
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_006",
+      "split": "train",
+      "tokens": 326
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_007",
+      "split": "train",
+      "tokens": 319
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_004",
+      "split": "train",
+      "tokens": 369
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_005",
+      "split": "train",
+      "tokens": 377
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_006",
+      "split": "train",
+      "tokens": 388
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_007",
+      "split": "train",
+      "tokens": 336
+    },
+    {
+      "id": "rc_zh_hant_high_004",
+      "split": "train",
+      "tokens": 424
+    },
+    {
+      "id": "rc_zh_hant_high_005",
+      "split": "train",
+      "tokens": 405
+    },
+    {
+      "id": "rc_zh_hant_high_006",
+      "split": "train",
+      "tokens": 365
+    },
+    {
+      "id": "rc_zh_hant_high_009",
+      "split": "train",
+      "tokens": 366
+    },
+    {
+      "id": "rc_zh_hant_high_010",
+      "split": "train",
+      "tokens": 351
+    },
+    {
+      "id": "rc_zh_hant_high_011",
+      "split": "train",
+      "tokens": 386
+    },
+    {
+      "id": "rc_zh_hant_high_012",
+      "split": "train",
+      "tokens": 387
+    },
+    {
+      "id": "rc_zh_hant_high_013",
+      "split": "train",
+      "tokens": 361
+    },
+    {
+      "id": "rc_zh_hant_high_014",
+      "split": "train",
+      "tokens": 340
+    },
+    {
+      "id": "rc_zh_hant_high_015",
+      "split": "train",
+      "tokens": 354
+    },
+    {
+      "id": "rc_zh_hant_high_016",
+      "split": "train",
+      "tokens": 391
+    },
+    {
+      "id": "rc_zh_hant_low_001",
+      "split": "train",
+      "tokens": 256
+    },
+    {
+      "id": "rc_zh_hant_low_002",
+      "split": "train",
+      "tokens": 256
+    },
+    {
+      "id": "rc_zh_hant_low_003",
+      "split": "train",
+      "tokens": 254
+    },
+    {
+      "id": "rc_zh_hant_low_006",
+      "split": "train",
+      "tokens": 279
+    },
+    {
+      "id": "rc_zh_hant_low_007",
+      "split": "train",
+      "tokens": 285
+    },
+    {
+      "id": "rc_zh_hant_low_009",
+      "split": "train",
+      "tokens": 264
+    },
+    {
+      "id": "rc_zh_hant_low_010",
+      "split": "train",
+      "tokens": 282
+    },
+    {
+      "id": "rc_zh_hant_low_012",
+      "split": "train",
+      "tokens": 257
+    },
+    {
+      "id": "rc_zh_hant_low_014",
+      "split": "train",
+      "tokens": 264
+    },
+    {
+      "id": "rc_zh_hant_low_015",
+      "split": "train",
+      "tokens": 268
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_001",
+      "split": "train",
+      "tokens": 536
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_002",
+      "split": "train",
+      "tokens": 466
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_003",
+      "split": "train",
+      "tokens": 433
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_005",
+      "split": "train",
+      "tokens": 396
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_006",
+      "split": "train",
+      "tokens": 490
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_001",
+      "split": "train",
+      "tokens": 289
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_002",
+      "split": "train",
+      "tokens": 280
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_003",
+      "split": "train",
+      "tokens": 305
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_004",
+      "split": "train",
+      "tokens": 306
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_006",
+      "split": "train",
+      "tokens": 279
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_007",
+      "split": "train",
+      "tokens": 300
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_001",
+      "split": "train",
+      "tokens": 381
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_002",
+      "split": "train",
+      "tokens": 369
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_003",
+      "split": "train",
+      "tokens": 374
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_005",
+      "split": "train",
+      "tokens": 385
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_006",
+      "split": "train",
+      "tokens": 344
+    },
+    {
+      "id": "rc_zh_hant_medium_002",
+      "split": "train",
+      "tokens": 416
+    },
+    {
+      "id": "rc_zh_hant_medium_003",
+      "split": "train",
+      "tokens": 371
+    },
+    {
+      "id": "rc_zh_hant_medium_004",
+      "split": "train",
+      "tokens": 285
+    },
+    {
+      "id": "rc_zh_hant_medium_005",
+      "split": "train",
+      "tokens": 301
+    },
+    {
+      "id": "rc_zh_hant_medium_006",
+      "split": "train",
+      "tokens": 311
+    },
+    {
+      "id": "rc_zh_hant_medium_007",
+      "split": "train",
+      "tokens": 377
+    },
+    {
+      "id": "rc_zh_hant_medium_008",
+      "split": "train",
+      "tokens": 335
+    },
+    {
+      "id": "rc_zh_hant_medium_010",
+      "split": "train",
+      "tokens": 325
+    },
+    {
+      "id": "rc_zh_hant_medium_012",
+      "split": "train",
+      "tokens": 284
+    },
+    {
+      "id": "rc_zh_hant_medium_013",
+      "split": "train",
+      "tokens": 288
+    },
+    {
+      "id": "rc_zh_hant_medium_016",
+      "split": "train",
+      "tokens": 308
+    },
+    {
+      "id": "rc_en_architecture_high_003",
+      "split": "dev",
+      "tokens": 468
+    },
+    {
+      "id": "rc_en_architecture_high_004",
+      "split": "dev",
+      "tokens": 404
+    },
+    {
+      "id": "rc_en_architecture_low_003",
+      "split": "dev",
+      "tokens": 343
+    },
+    {
+      "id": "rc_en_architecture_low_004",
+      "split": "dev",
+      "tokens": 327
+    },
+    {
+      "id": "rc_en_architecture_medium_002",
+      "split": "dev",
+      "tokens": 397
+    },
+    {
+      "id": "rc_en_architecture_medium_003",
+      "split": "dev",
+      "tokens": 359
+    },
+    {
+      "id": "rc_en_high_001",
+      "split": "dev",
+      "tokens": 328
+    },
+    {
+      "id": "rc_en_high_003",
+      "split": "dev",
+      "tokens": 361
+    },
+    {
+      "id": "rc_en_high_008",
+      "split": "dev",
+      "tokens": 311
+    },
+    {
+      "id": "rc_en_low_008",
+      "split": "dev",
+      "tokens": 291
+    },
+    {
+      "id": "rc_en_low_013",
+      "split": "dev",
+      "tokens": 266
+    },
+    {
+      "id": "rc_en_low_016",
+      "split": "dev",
+      "tokens": 274
+    },
+    {
+      "id": "rc_en_marketing_high_007",
+      "split": "dev",
+      "tokens": 422
+    },
+    {
+      "id": "rc_en_marketing_low_008",
+      "split": "dev",
+      "tokens": 303
+    },
+    {
+      "id": "rc_en_marketing_medium_007",
+      "split": "dev",
+      "tokens": 353
+    },
+    {
+      "id": "rc_en_medium_001",
+      "split": "dev",
+      "tokens": 347
+    },
+    {
+      "id": "rc_en_medium_011",
+      "split": "dev",
+      "tokens": 326
+    },
+    {
+      "id": "rc_en_medium_014",
+      "split": "dev",
+      "tokens": 307
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_003",
+      "split": "dev",
+      "tokens": 528
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_004",
+      "split": "dev",
+      "tokens": 455
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_003",
+      "split": "dev",
+      "tokens": 344
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_004",
+      "split": "dev",
+      "tokens": 337
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_002",
+      "split": "dev",
+      "tokens": 411
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_003",
+      "split": "dev",
+      "tokens": 378
+    },
+    {
+      "id": "rc_zh_hant_high_001",
+      "split": "dev",
+      "tokens": 346
+    },
+    {
+      "id": "rc_zh_hant_high_003",
+      "split": "dev",
+      "tokens": 366
+    },
+    {
+      "id": "rc_zh_hant_high_008",
+      "split": "dev",
+      "tokens": 316
+    },
+    {
+      "id": "rc_zh_hant_low_008",
+      "split": "dev",
+      "tokens": 283
+    },
+    {
+      "id": "rc_zh_hant_low_013",
+      "split": "dev",
+      "tokens": 259
+    },
+    {
+      "id": "rc_zh_hant_low_016",
+      "split": "dev",
+      "tokens": 264
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_007",
+      "split": "dev",
+      "tokens": 448
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_008",
+      "split": "dev",
+      "tokens": 314
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_007",
+      "split": "dev",
+      "tokens": 360
+    },
+    {
+      "id": "rc_zh_hant_medium_001",
+      "split": "dev",
+      "tokens": 380
+    },
+    {
+      "id": "rc_zh_hant_medium_011",
+      "split": "dev",
+      "tokens": 334
+    },
+    {
+      "id": "rc_zh_hant_medium_014",
+      "split": "dev",
+      "tokens": 314
+    },
+    {
+      "id": "rc_en_architecture_high_002",
+      "split": "test",
+      "tokens": 383
+    },
+    {
+      "id": "rc_en_architecture_high_008",
+      "split": "test",
+      "tokens": 405
+    },
+    {
+      "id": "rc_en_architecture_low_008",
+      "split": "test",
+      "tokens": 312
+    },
+    {
+      "id": "rc_en_architecture_medium_001",
+      "split": "test",
+      "tokens": 327
+    },
+    {
+      "id": "rc_en_architecture_medium_008",
+      "split": "test",
+      "tokens": 316
+    },
+    {
+      "id": "rc_en_high_002",
+      "split": "test",
+      "tokens": 314
+    },
+    {
+      "id": "rc_en_high_007",
+      "split": "test",
+      "tokens": 323
+    },
+    {
+      "id": "rc_en_low_004",
+      "split": "test",
+      "tokens": 257
+    },
+    {
+      "id": "rc_en_low_005",
+      "split": "test",
+      "tokens": 260
+    },
+    {
+      "id": "rc_en_low_011",
+      "split": "test",
+      "tokens": 261
+    },
+    {
+      "id": "rc_en_marketing_high_004",
+      "split": "test",
+      "tokens": 407
+    },
+    {
+      "id": "rc_en_marketing_high_008",
+      "split": "test",
+      "tokens": 494
+    },
+    {
+      "id": "rc_en_marketing_low_005",
+      "split": "test",
+      "tokens": 288
+    },
+    {
+      "id": "rc_en_marketing_medium_004",
+      "split": "test",
+      "tokens": 340
+    },
+    {
+      "id": "rc_en_marketing_medium_008",
+      "split": "test",
+      "tokens": 387
+    },
+    {
+      "id": "rc_en_medium_009",
+      "split": "test",
+      "tokens": 299
+    },
+    {
+      "id": "rc_en_medium_015",
+      "split": "test",
+      "tokens": 313
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_002",
+      "split": "test",
+      "tokens": 401
+    },
+    {
+      "id": "rc_zh_hant_architecture_high_008",
+      "split": "test",
+      "tokens": 423
+    },
+    {
+      "id": "rc_zh_hant_architecture_low_008",
+      "split": "test",
+      "tokens": 313
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_001",
+      "split": "test",
+      "tokens": 331
+    },
+    {
+      "id": "rc_zh_hant_architecture_medium_008",
+      "split": "test",
+      "tokens": 311
+    },
+    {
+      "id": "rc_zh_hant_high_002",
+      "split": "test",
+      "tokens": 329
+    },
+    {
+      "id": "rc_zh_hant_high_007",
+      "split": "test",
+      "tokens": 329
+    },
+    {
+      "id": "rc_zh_hant_low_004",
+      "split": "test",
+      "tokens": 251
+    },
+    {
+      "id": "rc_zh_hant_low_005",
+      "split": "test",
+      "tokens": 256
+    },
+    {
+      "id": "rc_zh_hant_low_011",
+      "split": "test",
+      "tokens": 260
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_004",
+      "split": "test",
+      "tokens": 411
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_008",
+      "split": "test",
+      "tokens": 510
+    },
+    {
+      "id": "rc_zh_hant_marketing_low_005",
+      "split": "test",
+      "tokens": 296
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_004",
+      "split": "test",
+      "tokens": 357
+    },
+    {
+      "id": "rc_zh_hant_marketing_medium_008",
+      "split": "test",
+      "tokens": 409
+    },
+    {
+      "id": "rc_zh_hant_medium_009",
+      "split": "test",
+      "tokens": 303
+    },
+    {
+      "id": "rc_zh_hant_medium_015",
+      "split": "test",
+      "tokens": 314
+    }
+  ],
+  "same_split_manifest_as_4b": true,
+  "split_files_sha256": {
+    "train.jsonl": "25d902a727cdcaf3b8475bfd7b120d278fcaf14e4793822fe4a42053ddf24700",
+    "dev.jsonl": "bc9430c319496a269e4918984b745ce3639194478b7992249bc796903ee5e107",
+    "test.jsonl": "7fc9cdfc59a8c7a2f6f0f1543aa0602d1627671af37fbc80cf778b6acb04df1c"
+  },
+  "preflight_records": [
+    {
+      "id": "rc_zh_hant_marketing_high_001",
+      "split": "train",
+      "tokens": 536
+    },
+    {
+      "id": "rc_zh_hant_marketing_high_006",
+      "split": "train",
+      "tokens": 490
+    }
+  ],
+  "parent_hashes_match_previous_baseline": true
+}
